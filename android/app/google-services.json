@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "191058805229",
+    "project_id": "storeapp-41759",
+    "storage_bucket": "storeapp-41759.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191058805229:android:a6d6635de4e198a15b27e4",
+        "android_client_info": {
+          "package_name": "br.com.zaim.flutter_app_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191058805229-qsgqf34schhnt957putirucj2f70ut0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJVsN4cg99DYt7XTaXlnTXjptLX9W0H5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191058805229-qsgqf34schhnt957putirucj2f70ut0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
