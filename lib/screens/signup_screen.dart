@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_2/models/user_model.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:provider/provider.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -37,8 +37,8 @@ class _SignupScreenState extends State<SignupScreen> {
           )
         ],
       ),
-      body: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model) {
+      body: Consumer<UserModel>(
+        builder: (_, model, __) {
           if(model.isLoading)
             return Center(child: CircularProgressIndicator());
 

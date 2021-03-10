@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_2/models/user_model.dart';
 import 'package:flutter_app_2/screens/login_screen.dart';
 import 'package:flutter_app_2/tiles/drawer_tile.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
 
@@ -52,8 +52,8 @@ class CustomDrawer extends StatelessWidget {
                       left: 0.0,
                     ),
                     Positioned(
-                      child: ScopedModelDescendant<UserModel>(
-                        builder: (context, child, model) {
+                      child: Consumer<UserModel>(
+                        builder: (_, model, __) {
                           return  Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

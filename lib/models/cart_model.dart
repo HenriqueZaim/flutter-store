@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app_2/datas/cart_product_data.dart';
 import 'package:flutter_app_2/models/user_model.dart';
-import 'package:scoped_model/scoped_model.dart';
 
-class CartModel extends Model{
+class CartModel with ChangeNotifier{
 
   UserModel user;
   List<CartProductData> products = [];
