@@ -1,7 +1,12 @@
-
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_2/datas/cart_product_data.dart';
 import 'package:flutter_app_2/datas/product_data.dart';
+import 'package:flutter_app_2/models/cart_model.dart';
+import 'package:flutter_app_2/models/user_model.dart';
+import 'package:flutter_app_2/screens/cart_screen.dart';
+import 'package:flutter_app_2/screens/login_screen.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
 
@@ -24,6 +29,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
+    final cartModel = Provider.of<CartModel>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -114,16 +120,42 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
                 SizedBox(
                   height: 44.0,
-                  child: RaisedButton(
-                    onPressed: processor != null ? (){} : null,
-                    color: primaryColor,
-                    child: Text(
-                      "Adicionar ao carrinho",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white
-                      ),
-                    ),
+                  child: Consumer<UserModel>(
+                    builder: (_, model, __) {
+                      return ElevatedButton(
+                        onPressed: processor != null
+                            ? (){
+                                if(model.isLoggedIn()){
+                                  CartProductData cartProductData = CartProductData();
+                                  cartProductData.category = product.category;
+                                  cartProductData.processor = processor;
+                                  cartProductData.quantity = 1;
+                                  cartProductData.product_id = product.id;
+
+                                  cartModel.addItem(cartProductData);
+
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) => CartScreen())
+                                  );
+
+                                }else{
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => LoginScreen())
+                                  );
+                                }
+                              }
+                            : null,
+                        child: Text(
+                          model.isLoggedIn()
+                              ? "Adicionar ao carrinho"
+                              : "Entre para adicionar",
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.white
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 SizedBox(

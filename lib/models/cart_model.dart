@@ -8,25 +8,65 @@ class CartModel with ChangeNotifier{
   UserModel user;
   List<CartProductData> products = [];
 
-  CartModel(this.user);
+  bool isLoading = false;
+
+  CartModel(this.user) {
+    if(this.user != null && this.user.isLoggedIn()) {
+      getItens(user_uid: this.user.firebaseUser.uid);
+    }
+  }
+
+  void getItens({@required String user_uid}) async {
+    this.isLoading = true;
+    notifyListeners();
+
+    QuerySnapshot data = await Firestore.instance.collection('users')
+        .document(user_uid)
+        .collection("cart").getDocuments();
+
+    products = data.documents.map((item){
+      return CartProductData.fromDocument(item);
+    }).toList();
+
+    this.isLoading = false;
+    notifyListeners();
+  }
 
   void addItem(CartProductData cartProductData){
-    products.add(cartProductData);
+    this.isLoading = true;
+    notifyListeners();
 
+    products.add(cartProductData);
     Firestore.instance.collection("users").document(user.firebaseUser.uid)
       .collection("cart").add(cartProductData.toMap())
         .then((value) {
-          cartProductData.cart_id = value.documentID;
+          cartProductData.uid = value.documentID;
         });
 
+    this.isLoading = false;
     notifyListeners();
   }
 
   void removeItem(CartProductData cartProductData){
+    this.isLoading = true;
+    notifyListeners();
+
     Firestore.instance.collection("users").document(user.firebaseUser.uid)
-        .collection("cart").document(cartProductData.cart_id).delete();
+        .collection("cart").document(cartProductData.uid).delete();
 
     products.remove(cartProductData);
+    notifyListeners();
+
+    this.isLoading = false;
+    notifyListeners();
+  }
+
+  void updateQtty(CartProductData cartProductData, int value){
+    cartProductData.quantity += value;
+
+    Firestore.instance.collection("users").document(user.firebaseUser.uid).collection("cart")
+      .document(cartProductData.uid).updateData(cartProductData.toMap());
+
     notifyListeners();
   }
 }

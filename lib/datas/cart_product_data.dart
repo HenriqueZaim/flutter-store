@@ -4,30 +4,31 @@ import 'package:flutter_app_2/datas/product_data.dart';
 
 class CartProductData {
 
-  String cart_id;
+  String uid;
   String category;
   String product_id;
-  String size;
+  String processor;
 
   int quantity;
 
   ProductData productData;
 
+  CartProductData();
+
   CartProductData.fromDocument(DocumentSnapshot documentSnapshot){
-    cart_id = documentSnapshot.documentID;
+    uid = documentSnapshot.documentID;
     category = documentSnapshot.data["category"];
     product_id = documentSnapshot.data["product_id"];
     quantity = documentSnapshot.data["quantity"];
-    size = documentSnapshot.data["size"];
+    processor = documentSnapshot.data["processor"];
   }
 
   Map<String, dynamic> toMap(){
     return {
       "category": category,
-      "cart_id": cart_id,
-      "product": productData.toResumedMap(),
-      "size": size,
-      "quantity": quantity
+      "processor": processor,
+      "quantity": quantity,
+      "product_id": product_id
     };
   }
 }
