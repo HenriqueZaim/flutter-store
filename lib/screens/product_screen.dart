@@ -130,7 +130,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                   cartProductData.category = product.category;
                                   cartProductData.processor = processor;
                                   cartProductData.quantity = 1;
-                                  cartProductData.product_id = product.id;
+                                  cartProductData.product_id = product.uid;
+                                  cartProductData.productData = product;
 
                                   cartModel.addItem(cartProductData);
 

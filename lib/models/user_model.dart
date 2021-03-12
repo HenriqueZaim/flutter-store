@@ -14,7 +14,6 @@ class UserModel with ChangeNotifier{
 
   @override
   void addListener(listener) {
-    // TODO: implement addListener
     super.addListener(listener);
     _loadCurrentUser();
   }

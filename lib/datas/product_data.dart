@@ -2,7 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductData {
-  String id;
+  String uid;
   String title;
   String description;
   String category;
@@ -11,7 +11,7 @@ class ProductData {
   List processors;
 
   ProductData.fromDocument(DocumentSnapshot snapshot){
-    id = snapshot.documentID;
+    uid = snapshot.documentID;
     title = snapshot.data["title"];
     description = snapshot.data["description"];
     price = snapshot.data["price"] + 0.0;

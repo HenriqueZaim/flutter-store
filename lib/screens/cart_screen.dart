@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app_2/models/cart_model.dart';
 import 'package:flutter_app_2/screens/login_screen.dart';
 import 'package:flutter_app_2/tiles/cart_tile.dart';
+import 'package:flutter_app_2/widgets/discount_card.dart';
+import 'package:flutter_app_2/widgets/price_card.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -70,9 +72,15 @@ class CartScreen extends StatelessWidget {
                   )
                 : Center(
                     child: ListView(
-                      children: model.products.map((item){
-                        return CartTile(item);
-                      }).toList(),
+                      children: [
+                        Column(
+                          children: model.products.map((item){
+                            return CartTile(item);
+                          }).toList(),
+                        ),
+                        DiscountCard(),
+                        PriceCard()
+                      ]
                     )
                   )
 

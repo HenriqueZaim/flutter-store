@@ -14,6 +14,7 @@ class CartTile extends StatelessWidget {
 
     return Consumer<CartModel>(
       builder: (_, cartModel, __) {
+        cartModel.updatePrices();
         return Row(
           children: [
             Container(

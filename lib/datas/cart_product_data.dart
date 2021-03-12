@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app_2/datas/product_data.dart';
+import 'package:sqflite/sqflite.dart';
 
 class CartProductData {
 
@@ -28,7 +29,8 @@ class CartProductData {
       "category": category,
       "processor": processor,
       "quantity": quantity,
-      "product_id": product_id
+      "product_id": product_id,
+      "product": productData.toResumedMap()
     };
   }
 }
